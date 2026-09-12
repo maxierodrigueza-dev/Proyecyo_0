@@ -1,2 +1,7 @@
-Primeros pasos del Proyecto_0
-Soy Máximo Rodríguez y estoy haciendo actividades de programación
+Proyecto_0
+Descripcion breve del proyecto:
+Herramienta de Python para procesar y analizar el archivo de obsevaciones meteorológicas actuales del Servicio Meteorológico Nacional (SMN).
+
+
+Link a la página del SMN: https://www.smn.gob.ar/descarga-de-datos
+
