@@ -30,38 +30,6 @@ with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
         #Fechas para datetime
         fecha = campos[1]#(dd-mes-aaaa)
         fecha_dd_mes_aaaa= campos[1].split("-")
-import datetime
-import sys
-    #Dicc principal
-mi_dicc= {}
-     #Datetime necesita ints, no string que digan "febrero"
-meses = {"enero" : 1,
-        "febrero":2, 
-        "marzo":3, 
-        "abril":4, 
-        "mayo":5, 
-        "junio":6, 
-        "julio":7, 
-        "agosto": 8,
-        "septiembre": 9, 
-        "octubre": 10, 
-        "noviembre": 11,
-        "diciembre": 12
-            } 
-with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
-
-    for x in f:
-
-        campos = x.split(";")
-
-        if len(campos) != 10:
-              continue
-    
-        ciuad_estación = campos[0].strip() # Le borro los espacios en blanco
-
-        #Fechas para datetime
-        fecha = campos[1]#(dd-mes-aaaa)
-        fecha_dd_mes_aaaa= campos[1].split("-")
         fecha_dd =  int(fecha_dd_mes_aaaa[0])
         fecha_mes = meses[fecha_dd_mes_aaaa[1]]
         fecha_aaaa = int(fecha_dd_mes_aaaa[2])
@@ -86,6 +54,7 @@ with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
                     direccion = "Calma"
                     velocidad = 0.0
         
+        else:
             direccion = " ".join(viento_separado[:-1])
             velocidad = float(viento_separado[-1])
 
@@ -111,4 +80,4 @@ with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
                                     "Presión (hPa)":presión_hPa}
         print(sensación_térmica_C)
 
-    
+        
