@@ -1,12 +1,9 @@
-
 import datetime
-
-
-with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
+import sys
     #Dicc principal
-    mi_dicc= {}
+mi_dicc= {}
      #Datetime necesita ints, no string que digan "febrero"
-    meses = {"enero" : 1,
+meses = {"enero" : 1,
         "febrero":2, 
         "marzo":3, 
         "abril":4, 
@@ -19,14 +16,48 @@ with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
         "noviembre": 11,
         "diciembre": 12
             } 
+with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
+
     for x in f:
 
-       
-
-       
-        
         campos = x.split(";")
-        ciuad_estación = campos[0]
+
+        if len(campos) != 10:
+              continue
+    
+        ciuad_estación = campos[0].strip() # Le borro los espacios en blanco
+
+        #Fechas para datetime
+        fecha = campos[1]#(dd-mes-aaaa)
+        fecha_dd_mes_aaaa= campos[1].split("-")
+import datetime
+import sys
+    #Dicc principal
+mi_dicc= {}
+     #Datetime necesita ints, no string que digan "febrero"
+meses = {"enero" : 1,
+        "febrero":2, 
+        "marzo":3, 
+        "abril":4, 
+        "mayo":5, 
+        "junio":6, 
+        "julio":7, 
+        "agosto": 8,
+        "septiembre": 9, 
+        "octubre": 10, 
+        "noviembre": 11,
+        "diciembre": 12
+            } 
+with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
+
+    for x in f:
+
+        campos = x.split(";")
+
+        if len(campos) != 10:
+              continue
+    
+        ciuad_estación = campos[0].strip() # Le borro los espacios en blanco
 
         #Fechas para datetime
         fecha = campos[1]#(dd-mes-aaaa)
@@ -41,12 +72,43 @@ with open("estado_tiempo20260910.txt", encoding="utf-8") as f:
         hora = campos[2]
         condición_del_cielo = campos[3]
         visibilidad = campos[4]
-        temperatura_C = campos[5]
+        temperatura_C = float(campos[5])
         sensación_térmica_C= campos[6] #— puede venir como el texto No se calcula en vez de un número
-        humedad = campos[7]
+        humedad = int(campos[7])
         viento= campos[8] #dirección y velocidad juntos (por ejemplo Sur  5, o Calma cuando no hay viento)
-        presión_hPa= campos[9]
+        presión_hPa= float(campos[9])
 
-        mi_dicc[ciuad_estación] = {"Fecha":fecha_final, "Hora":hora, "Condicion del cielo": condición_del_cielo, "Visibilidad":visibilidad, "temperatura(°C)":temperatura_C, "Sensación térmica (°C)":sensación_térmica_C,"Humedad (%)":humedad, "Viento (dirección y viento)":viento, "Presión (hPa)":presión_hPa}
+    
+        # Apartado de viento
+        viento_separado = viento.split()
+
+        if  "Calma" in viento_separado:
+                    direccion = "Calma"
+                    velocidad = 0.0
         
+            direccion = " ".join(viento_separado[:-1])
+            velocidad = float(viento_separado[-1])
 
+
+
+        # Apartado del Sensacion_termina_C
+
+        if "No se calcula" not in sensación_térmica_C:
+             sensación_térmica_C= float(sensación_térmica_C)
+        else:
+              sensación_térmica_C = None
+       
+
+        #Append a todo el dicc
+        mi_dicc[ciuad_estación] = { "Fecha":fecha_final, 
+                                    "Hora":hora, 
+                                    "Condicion del cielo": condición_del_cielo,
+                                    "Visibilidad":visibilidad, 
+                                    "temperatura(°C)":temperatura_C, 
+                                    "Sensación térmica (°C)":sensación_térmica_C,
+                                    "Humedad (%)":humedad,
+                                    "Viento (dirección y viento)":[direccion, velocidad], 
+                                    "Presión (hPa)":presión_hPa}
+        print(sensación_térmica_C)
+
+    
