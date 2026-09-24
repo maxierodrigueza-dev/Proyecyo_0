@@ -1,17 +1,16 @@
-Proyecto 0
+# Proyecto 0
 
-Descripcion breve del proyecto:
-Herramienta de Python para procesar y analizar el archivo de obsevaciones meteorológicas actuales del Servicio Meteorológico Nacional (SMN).
+Herramienta en Python para procesar y analizar observaciones meteorológicas del Servicio Meteorológico Nacional (SMN).
 
-Funciones:
--Cantidad total de ciudades leídas
--Ciudad(es) con la temperatura máxima y con la temperatura mínima
--Funcion generica:
-Devuelve las n (por parámetro) ciudades ordenadas según 'campo', de mayor a menor(o al revés si descendente=False), en una lista. Reutilizable tanto para temperatura como para viento.
--Ciudad(es) con la velocidad de viento máxima y con la mínima
--Apartado de viento:
-Convierte un campo de viento como 'Norte  3' en (dirección, velocidad). Contempla el caso 'Calma' (sin velocidad numérica).
--Reporte de información faltante
+## Funciones Principales
 
-Link a la página del SMN: https://www.smn.gob.ar/descarga-de-datos
+* **Cantidad de ciudades leídas**: Calcula el total de registros procesados.
+* **Temperaturas extremas**: Identifica la ciudad con la temperatura máxima y mínima.
+* **Top $N$ ciudades**: Función genérica para ordenar ciudades de mayor a menor según cualquier campo (temperatura, viento, etc.).
+* **Vientos extremos**: Determina las velocidades de viento máxima y mínima.
+* **Separador de viento**: Convierte cadenas como `"Norte 3"` en tuplas `(dirección, velocidad)` y maneja el caso de `"Calma"`.
+* **Reporte de faltantes**: Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (`None`).
 
+## Enlaces de Interés
+
+* [Sitio oficial del SMN - Descarga de datos](https://www.google.com/search?q=https://www.smn.gob.ar/descarga-de-datos&utm_source=gemini)
