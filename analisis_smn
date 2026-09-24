@@ -2,13 +2,13 @@ import datetime
 import sys
 
 #Verificar que le hayas pasado argumento correctamente a la terminal
-if len(sys.argv) != 2:
-    print("Error: Falta ingresar la ruta del archivo.")
-    sys.exit(1)
-ruta_archivo = sys.argv[1]
+#if len(sys.argv) != 2:
+#    print("Error: Falta ingresar la ruta del archivo.")
+#    sys.exit(1)
+#ruta_archivo = sys.argv[1]
 
 
-# APARTADO DE FUNCIONES
+#================= APARTADO DE FUNCIONES ====================
 
 #cantidad total de ciudades leídas
 def cantidad_ciudades_leidas(ciudades:dict) -> list:
@@ -17,7 +17,7 @@ def cantidad_ciudades_leidas(ciudades:dict) -> list:
     cant = 0
     for ciudad in ciudades.keys():
         cant +=1
-    return f"cantidad de ciudades leidas: {cant}"
+    return f"Cantidad de ciudades leidas: {cant}"
 
 
 # Ciudades con toda la info
@@ -28,7 +28,7 @@ def cantidad_ciudades_completas(observaciones: dict) -> int:
     for valores in observaciones.values():
         if None not in valores.values():
             numero += 1
-    return f"ciudades sin ningun dato faltante: {numero}"
+    return f"Ciudades sin ningun dato faltante: {numero}"
 
 #ciudad(es) con la temperatura máxima y con la temperatura mínima;
 def tem_max_min (temperatura:dict) -> str:
@@ -47,7 +47,7 @@ def tem_max_min (temperatura:dict) -> str:
         if t < min_temp:
             ciudad_min = c
             min_temp = t
-    return f"Máxima: {ciudad_max} ({max_temp}°C) | Minima: {ciudad_min} ({min_temp}°C)"
+    return f"Temperatura:{"\n"}-Máxima: {ciudad_max} ({max_temp}°C) | Minima: {ciudad_min} ({min_temp}°C)"
 
 #Funcion generica 
 def top_n_ciudades(observaciones: dict, campo: str, n: int, descendente: bool = True) -> list:
@@ -89,12 +89,12 @@ def viento_max_min(viento:dict) -> str:
         if v < min_viento:
             ciudad_min = c
             min_viento = v
-    return f"Máxima: {ciudad_max} ({max_viento}) | Minima: {ciudad_min} ({min_viento})"
+    return f"Velocidad del viento:{"\n"}-Máxima: {ciudad_max} ({max_viento}) | Minima: {ciudad_min} ({min_viento})"
 
 
 # Apartado de viento
 def separar_viento(campo_viento: str) -> tuple:
-    """Convierte un campo de viento como 'Norte  3' en (direccion, velocidad).
+    """Convierte un campo de viento como 'Norte  3' en (dirección, velocidad).
     Contempla el caso 'Calma' (sin velocidad numérica)."""
     viento_separado = campo_viento.split()
 
@@ -123,12 +123,12 @@ def reporte_faltantes(observaciones: dict) -> dict:
                     afectadas[campo] = [c]
                 else:
                     afectadas[campo].append(c)
-    return afectadas
+    return f"Informacion faltante:{"\n"}{afectadas}"
 
 
 
-###LEER EL ARCHIVO
-with open(ruta_archivo, encoding="latin-1") as f:
+#=================== LEER EL ARCHIVO =============================
+with open("estado_tiempo20260910.txt", encoding="latin-1") as f:
 
     # Dicc principal
     mi_dicc = {}
@@ -206,14 +206,13 @@ with open(ruta_archivo, encoding="latin-1") as f:
         }
 
 
-#  FUNCIONAMIENTO 
-print("Apratado de funcionamiento ")
-print("---")
-print(cantidad_ciudades_completas(mi_dicc))
-print(cantidad_ciudades_leidas(mi_dicc))
-print(f"Dirección del viento, velocidad: {separar_viento("Norte 3")}")
-print(f"Top n ciudades: {top_n_ciudades(mi_dicc,"Sensación térmica (°C)",50, descendente=False)}")
-print(tem_max_min(mi_dicc))
-print(viento_max_min(mi_dicc))
-print(reporte_faltantes(mi_dicc))
+#================================== FUNCIONAMIENTO ================================== 
+print(f" --- {"\n"}Información procesada:{"\n"} ")
+lista_de_funciones = [cantidad_ciudades_completas, cantidad_ciudades_leidas, tem_max_min,viento_max_min, reporte_faltantes]
+
+for i in lista_de_funciones:
+    print(i(mi_dicc),  "\n")
+
+print(f"Dirección del viento, velocidad:{"\n"}{separar_viento("Norte 3")}{"\n"}")
+print(f"Top n ciudades:{"\n"}{top_n_ciudades(mi_dicc,"Sensación térmica (°C)",50, descendente=False)}{"\n"}")
 print("---")
