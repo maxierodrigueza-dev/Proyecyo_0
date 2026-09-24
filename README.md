@@ -4,12 +4,20 @@ Herramienta en Python para procesar y analizar observaciones meteorológicas del
 
 ## Funciones Principales
 
-* **Cantidad de ciudades leídas**: Calcula el total de registros procesados.
-* **Temperaturas extremas**: Identifica la ciudad con la temperatura máxima y mínima.
-* **Top $N$ ciudades**: Función genérica para ordenar ciudades de mayor a menor según cualquier campo (temperatura, viento, etc.).
-* **Vientos extremos**: Determina las velocidades de viento máxima y mínima.
-* **Separador de viento**: Convierte cadenas como `"Norte 3"` en tuplas `(dirección, velocidad)` y maneja el caso de `"Calma"`.
-* **Reporte de faltantes**: Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (`None`).
+*   **Cantidad de ciudades leídas:** Calcula el total de registros procesados.
+*   **Temperaturas extremas:** Identifica la ciudad con la temperatura máxima y mínima.
+*   **Top N ciudades:** Función genérica para ordenar ciudades de mayor a menor según cualquier campo (temperatura, viento, etc.).
+*   **Vientos extremos:** Determina las velocidades de viento máxima y mínima.
+*   **Separador de viento:** Convierte cadenas como "Norte 3" en tuplas (dirección, velocidad) y maneja el caso de "Calma".
+*   **Reporte de faltantes:** Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (`None`).
+
+## Cómo utilizar esta herramienta
+
+1. **Clonar el repositorio:**
+   Abri la terminal y ejecutá:
+   ```bash
+   git clone [https://github.com/maxierodrigueza-dev/nombre-de-tu-repo.git](https://github.com/maxierodrigueza-dev/nombre-de-tu-repo.git)
+   cd nombre-de-tu-repo
 
 ## Enlaces de Interés
 
