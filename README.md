@@ -9,15 +9,17 @@ Herramienta en Python para procesar y analizar observaciones meteorológicas del
 *   **Top N ciudades:** Función genérica para ordenar ciudades de mayor a menor según cualquier campo (temperatura, viento, etc.).
 *   **Vientos extremos:** Determina las velocidades de viento máxima y mínima.
 *   **Separador de viento:** Convierte cadenas como "Norte 3" en tuplas (dirección, velocidad) y maneja el caso de "Calma".
-*   **Reporte de faltantes:** Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (`None`).
+*   **Reporte de faltantes:** Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (None).
 
 ## Cómo utilizar esta herramienta
-
-1. **Clonar el repositorio:**
+1- **Descargar los datos meteorológicon por el link de abajo**
+2. **Clonar el repositorio:**
    Abri la terminal y ejecutá:
-   ```bash
-   git clone [https://github.com/maxierodrigueza-dev/nombre-de-tu-repo.git](https://github.com/maxierodrigueza-dev/nombre-de-tu-repo.git)
-   cd nombre-de-tu-repo
+   mkdir Proyecto_0
+   cd Protecto_0
+   git init
+   git clone https://github.com/maxierodrigueza-dev/Proyecyo_0
+   python analisis_smn.py estado_tiempo20260910.txtmk
 
 ## Enlaces de Interés
 
