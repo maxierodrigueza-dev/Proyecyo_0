@@ -1,0 +1,37 @@
+#ciudad(es) con la velocidad de viento máxima y con la mínima
+def viento_max_min(viento:dict) -> int:
+    """devuelve ciudad(es) con la velocidad de viento máxima y con la mínima"""
+    ciudad_max =""
+    max_viento = -100
+    ciudad_min = ""
+    min_viento = 100
+    for ciudad,informacion in  viento.items():
+        c = ciudad
+        v = informacion["Viento (dirección y viento)"][1]
+        if v > max_viento:
+            ciudad_max = c
+            max_viento = v
+        if v < min_viento:
+            ciudad_min = c
+            min_viento = v
+    return ciudad_max, max_viento, ciudad_min, min_viento
+
+#ciudad(es) con la temperatura máxima y con la temperatura mínima;
+def tem_max_min (temperatura:dict) -> int:
+    """Devuelve las ciudades con la temperatra máxima y mínima"""
+
+    ciudad_max =""
+    max_temp = -100
+    ciudad_min = ""
+    min_temp = 100
+    for ciudad,informacion in  temperatura.items():
+        c = ciudad
+        t = informacion["temperatura(°C)"]
+        if t > max_temp:
+            ciudad_max = c
+            max_temp = t
+        if t < min_temp:
+            ciudad_min = c
+            min_temp = t
+    return ciudad_max, max_temp, ciudad_min, min_temp
+# return f"Temperatura:{"\n"}-Máxima: {ciudad_max} ({max_temp}°C) | Minima: {ciudad_min} ({min_temp}°C)"
