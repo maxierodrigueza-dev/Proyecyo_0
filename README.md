@@ -11,17 +11,6 @@ Herramienta en Python para procesar y analizar observaciones meteorológicas del
 *   **Separador de viento:** Convierte cadenas como "Norte 3" en tuplas (dirección, velocidad) y maneja el caso de "Calma".
 *   **Reporte de faltantes:** Genera un diccionario agrupando por campo las ciudades que contienen datos nulos (None).
 
-## Cómo utilizar esta herramienta
-1- **Descargar los datos meteorológicon por el link de abajo**
-
-2. **Clonar el repositorio:**
-   Abri la terminal y ejecutá:
-   mkdir Proyecto_0
-   cd Protecto_0
-   git init
-   git clone https://github.com/maxierodrigueza-dev/Proyecyo_0
-   python analisis_smn.py estado_tiempo20260910.txtmk
-
 ## Enlaces de Interés
 
 * [Sitio oficial del SMN - Descarga de datos](https://www.google.com/search?q=https://www.smn.gob.ar/descarga-de-datos&utm_source=gemini)
