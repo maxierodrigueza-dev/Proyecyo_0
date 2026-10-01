@@ -12,7 +12,7 @@ ruta_archivo = sys.argv[1]
 
 def leer_observaciones(ruta: str) -> dict:   
     try:    
-        with open(ruta, encoding="utf-8") as f:
+        with open(ruta, encoding="latin-1") as f:
             mi_dicc = {}
             lineas_invalidas = 0 
 
@@ -31,11 +31,18 @@ def leer_observaciones(ruta: str) -> dict:
                 hora = campos[2]
                 condición_del_cielo = campos[3]
                 visibilidad = campos[4]
-                temperatura_C = float(campos[5])
+                try: 
+                    temperatura_C = float(campos[5])
+                    humedad = int(campos[7])
+                    presión_hPa = float(campos[9])
+                except ValueError:
+                    lineas_invalidas += 1 
+                    continue
+
                 sensación_térmica_C = campos[6]  # — puede venir como el texto No se calcula en vez de un número
-                humedad = int(campos[7])
+               
                 viento = campos[8]  # dirección y velocidad juntos (por ejemplo Sur  5, o Calma cuando no hay viento)
-                presión_hPa = float(campos[9])
+               
 
                 #Para la fecha
                 objeto_datetime = parsear_fecha_hora(campos[1], campos[2])
@@ -45,6 +52,7 @@ def leer_observaciones(ruta: str) -> dict:
                     sensación_térmica_C = float(sensación_térmica_C)
                 else:
                     sensación_térmica_C = None
+                    lineas_invalidas += 1 
 
                 #viento
                 direccion, velocidad = separar_viento(viento)
@@ -59,10 +67,11 @@ def leer_observaciones(ruta: str) -> dict:
                     "temperatura(°C)": temperatura_C,
                     "Sensación térmica (°C)": sensación_térmica_C,
                     "Humedad (%)": humedad,
-                    "Viento (dirección y viento)": [direccion, velocidad],
+                    "Dirección del viento": direccion,
+                    "Velocidad del viento": velocidad,
                     "Presión (hPa)": presión_hPa,
                 }
-                if lineas_invalidas > 0:
+            if lineas_invalidas > 0:
                     print(f"Aviso: Se ignoraron {lineas_invalidas} líneas por formato inválido.\n")
             return mi_dicc
     except FileNotFoundError:
@@ -92,20 +101,27 @@ def top_n_ciudades(observaciones: dict, campo: str, n: int, descendente: bool = 
     (o al revés si descendente=False), en una lista. Reutilizable tanto para temperatura
     como para viento."""
     lista_valores = []
+    
 
     for ciudad,info in observaciones.items():
         c = ciudad
         valor = info[campo]
 
-        if campo =="Viento (dirección y viento)":
-            valor= info[campo][1]
-
         if valor == None:
             continue
 
         lista_valores.append((valor, c))
+
     lista_valores.sort(reverse=descendente)
-    return lista_valores[:n]
+    resultado = lista_valores[:n]
+
+    valor_de_corte = resultado[-1][0]
+    for i in lista_valores[n:]:
+        if i == valor_de_corte:
+            resultado.append(i)
+        else:
+            break
+    return resultado
 
 
 # Apartado de viento
@@ -198,8 +214,8 @@ def mostrar_resumen(observaciones: dict, n=5) -> None:
      print(f"- {ciudad}: {valor}°C")
 
  #Dirección del viento y velocidad ¿
- top_viento_max = top_n_ciudades(observaciones, "Viento (dirección y viento)", n, descendente=True)
- top_viento_min = top_n_ciudades(observaciones, "Viento (dirección y viento)", n, descendente=False)
+ top_viento_max = top_n_ciudades(observaciones, "Velocidad del viento", n, descendente=True)
+ top_viento_min = top_n_ciudades(observaciones, "Velocidad del viento", n, descendente=False)
  print("\nTop 5 ciudades más ventosas:")
  for valor, ciudad in top_viento_max:
      print(f"- {ciudad}: {valor}")
