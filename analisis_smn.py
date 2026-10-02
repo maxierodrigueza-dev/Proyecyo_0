@@ -117,7 +117,7 @@ def top_n_ciudades(observaciones: dict, campo: str, n: int, descendente: bool = 
 
     valor_de_corte = resultado[-1][0]
     for i in lista_valores[n:]:
-        if i == valor_de_corte:
+        if i[0] == valor_de_corte:
             resultado.append(i)
         else:
             break
