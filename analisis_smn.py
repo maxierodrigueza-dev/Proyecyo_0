@@ -65,9 +65,8 @@ def leer_observaciones(ruta: str) -> dict:
                     "Velocidad del viento": velocidad,
                     "Presión (hPa)": presión_hPa,
                 }
-            if lineas_invalidas > 0:
-                    print(f"Aviso: Se ignoraron {lineas_invalidas} líneas por formato inválido.\n")
-            return mi_dicc
+            
+            return mi_dicc, lineas_invalidas
     except FileNotFoundError:
         print("Error: No se encontró el archivo especificado.")
         sys.exit(1)
@@ -230,16 +229,19 @@ def mostrar_resumen(observaciones: dict, n=5) -> None:
     print(f"Ciudades sin toda la información: {len(ciudades)}\n{campo}: {ciudades}")
 
 
-
-
-  
 if __name__ == '__main__':
     #Verificar que le hayas pasado argumento correctamente a la terminal
     if len(sys.argv) != 2:
         print("Error: Falta ingresar la ruta del archivo.")
-    sys.exit(1)
+        sys.exit(1)
+
     ruta_archivo = sys.argv[1]
 
+
+    diccionario_final, lineas_invalidas = leer_observaciones(ruta_archivo)
+    # Imprime el aviso si hubo errores
+    if lineas_invalidas > 0:
+        print(f"Aviso: Se ignoraron {lineas_invalidas} líneas por formato inválido.\n")
+
     # Diccionario 
-    diccionario_final = leer_observaciones(ruta_archivo)
     mostrar_resumen(diccionario_final)
