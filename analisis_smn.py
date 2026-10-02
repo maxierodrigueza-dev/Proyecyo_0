@@ -1,12 +1,6 @@
 import datetime
 import sys
 
-#Verificar que le hayas pasado argumento correctamente a la terminal
-if len(sys.argv) != 2:
-    print("Error: Falta ingresar la ruta del archivo.")
-    sys.exit(1)
-ruta_archivo = sys.argv[1]
-
 
 #================= APARTADO DE FUNCIONES ====================
 
@@ -236,6 +230,16 @@ def mostrar_resumen(observaciones: dict, n=5) -> None:
     print(f"Ciudades sin toda la información: {len(ciudades)}\n{campo}: {ciudades}")
 
 
-# Diccionario 
-diccionario_final = leer_observaciones(ruta_archivo)
-mostrar_resumen(diccionario_final)
+
+
+  
+if __name__ == '__main__':
+    #Verificar que le hayas pasado argumento correctamente a la terminal
+    if len(sys.argv) != 2:
+        print("Error: Falta ingresar la ruta del archivo.")
+    sys.exit(1)
+    ruta_archivo = sys.argv[1]
+
+    # Diccionario 
+    diccionario_final = leer_observaciones(ruta_archivo)
+    mostrar_resumen(diccionario_final)
