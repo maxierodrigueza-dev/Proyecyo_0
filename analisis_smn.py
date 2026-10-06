@@ -45,8 +45,7 @@ def leer_observaciones(ruta: str) -> dict:
                 if "No se calcula" not in sensación_térmica_C:
                     sensación_térmica_C = float(sensación_térmica_C)
                 else:
-                    sensación_térmica_C = None
-                    lineas_invalidas += 1 
+                    sensación_térmica_C = None 
 
                 #viento
                 direccion, velocidad = separar_viento(viento)
@@ -108,6 +107,10 @@ def top_n_ciudades(observaciones: dict, campo: str, n: int, descendente: bool = 
     lista_valores.sort(reverse=descendente)
     resultado = lista_valores[:n]
 
+
+    if not resultado: # si la lista esta vacía
+        return resultado # termina acá y devuelve []
+    
     valor_de_corte = resultado[-1][0]
     for i in lista_valores[n:]:
         if i[0] == valor_de_corte:
@@ -219,14 +222,17 @@ def mostrar_resumen(observaciones: dict, n=5) -> None:
 
  #Horas
  hora = horarios_reportados(observaciones)
- print(f"\nHorarios reportados:\n{", ".join(hora)}")
+ print(f"\nHorarios reportados:\n{', '.join(hora)}") # alterno comillas simples dentro de {} para que no tire error 
 
 
  # Reporte de faltantes
  print("\nInformación faltante:")
  faltantes = reporte_faltantes(observaciones)
- for campo, ciudades in faltantes.items():
-    print(f"Ciudades sin toda la información: {len(ciudades)}\n{campo}: {ciudades}")
+ if not faltantes: # Si no hay columnas faltantes imprimi esto
+     print("No hay columnas con datos faltantes")
+ else:
+     for campo, ciudades in faltantes.items(): #Si hay columnas faltantes hace esto
+        print(f"Ciudades sin toda la información: {len(ciudades)}\n{campo}: {ciudades}")
 
 
 if __name__ == '__main__':
