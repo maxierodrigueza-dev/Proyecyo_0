@@ -14,7 +14,9 @@ Herramienta en Python para procesar y analizar observaciones meteorológicas del
 ## Enlaces de Interés
 
 * [Sitio oficial del SMN - Descarga de datos](https://www.google.com/search?q=https://www.smn.gob.ar/descarga-de-datos&utm_source=gemini)
-*  **Ejemplo de ejecución en terminal:**Aviso: Se ignoraron 96 líneas por formato inválido.
+
+
+*  **Ejemplo de ejecución en terminal:**
 
 --- Resumen Meteorológico ---
 Cantidad total de ciudades leídas: 121
@@ -47,6 +49,12 @@ Top 5 ciudades menos ventosas:
 - Cipolletti: 0.0
 - Gobernador Gregores: 0.0
 - Mar del Plata: 0.0
+- Metán: 0.0
+- Olavarría: 0.0
+- Pigué: 0.0
+- Rivadavia: 0.0
+- Uspallata: 0.0
+- Villa María Del Río Seco: 0.0
 
 Horarios reportados:
 09:00, 10:00, 11:00, 12:00, 13:00, 15:00
@@ -68,5 +76,3 @@ aquinchao', 'Río Colorado', 'Viedma', 'Metán', 'Salta', 'Jachal', 'San Juan', 
 a del Conlara', 'Villa Reynolds', 'Gobernador Gregores', 'Ceres', 'Rafaela', 'Reconquista', 'Rosario
 ', 'Santa Fe', 'Sunchales', 'Venado Tuerto', 'Termas de Rio Hondo', 'Santiago del Estero', 'Tucumán'
 , 'Base Esperanza', 'Base Carlini']
-
-
